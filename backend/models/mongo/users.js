@@ -20,10 +20,10 @@ const UserSchema = new mongoose.Schema(
         password: {
             type: String,
         },
-        /* role: {
+        role: {
             type: ["user", "admin"],
-            default: "admin"
-        }, */
+            default: "user"
+        },
         /* avatar: {
             type: String
         }, */

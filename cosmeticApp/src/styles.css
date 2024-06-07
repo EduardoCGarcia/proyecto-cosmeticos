@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+/* Importar tema de PrimeNG */
+@import '~primeng/resources/themes/vela-orange/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeicons/primeicons.css';
+@import '~primeflex/primeflex.css';
+
+/* Import Google Fonts in CSS as a fallback */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
