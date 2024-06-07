@@ -1,5 +1,6 @@
 const models = {
-    usersModel : require("./mongo/users")
+    usersModel : require("./mongo/users"),
+    articlesModel : require("./mongo/article")
 };
 
 module.exports = models;
