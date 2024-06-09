@@ -32,6 +32,9 @@ const validatorCreateArticle = [
     check("ubicacion")
         .exists()
         .isLength({ min: 0, max: 50 }),
+    check("imagen_url")
+        .exists()
+        .notEmpty(),
     (req, res, next) => {
         return validateResults(req, res, next);
     }

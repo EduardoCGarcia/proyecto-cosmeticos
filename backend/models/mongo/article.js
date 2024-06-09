@@ -5,42 +5,43 @@ const ArticleSchema = new mongoose.Schema(
     {
         codigo: {
             type: String,
-         //   require:true,
-         //   index: true,
-            unique:true
+            unique: true
         },
         nombre: {
             type: String
         },
-        cantidad:{
-            type:Number
+        cantidad: {
+            type: Number
         },
         marca: {
-            type: String,
+            type: String
         },
         modelo: {
-            type: String,
+            type: String
         },
         num_serie: {
-            type: String,
+            type: String
         },
         estado: {
-            type: String,
+            type: String
         },
         caracteristicas: {
-            type: String,
+            type: String
         },
         ubicacion: {
-            type: String,
+            type: String
         },
-        
+        imagen_url: {  // Campo para la URL de la imagen
+            type: String,
+            default: "http://localstorage:3000/file-1717954187867.png"
+        }
     },
     {
         timestamps: true,
         versionKey: false
     }
-)
+);
 
-ArticleSchema.plugin(mongooseDelete, {overrideMethods:"all"});
+ArticleSchema.plugin(mongooseDelete, { overrideMethods: "all" });
 
-module.exports =  mongoose.model("articles", ArticleSchema);
+module.exports = mongoose.model("articles", ArticleSchema);

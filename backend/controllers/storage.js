@@ -23,7 +23,7 @@ const getItems = async(req, res) => {
 
 /**
  * Obtener un detalle
- * @param {*} req 
+ * @param {*} req  
  * @param {*} res 
  */
 const getItem =  async(req, res) => {
