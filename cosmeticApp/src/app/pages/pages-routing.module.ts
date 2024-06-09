@@ -17,6 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./carrito/carrito.module').then(m => m.CarritoModule)
   },
   {
+    path: 'ventas',
+    loadChildren: () => import('./ventas/ventas.module').then(m => m.VentasModule)
+  },
+  {
     path:'', redirectTo:'auth', pathMatch:'full'
   },
   {

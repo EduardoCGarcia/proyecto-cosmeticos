@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { CarritoItem, CarritoService, ArticuloItem, Venta } from './services/carrito.service';
+import { CarritoItem, CarritoService, ArticuloItem, Venta, CarritoVenta } from './services/carrito.service';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { UserResponse } from '../auth/usuario';
+import { VentasService } from '../ventas/services/ventas.service';
 
 @Component({
   selector: 'app-carrito',
@@ -11,14 +12,17 @@ import { UserResponse } from '../auth/usuario';
 })
 export class CarritoComponent {
   carrito: CarritoItem[] = [];
-  nombreCliente: string | null = null; // Variable para almacenar el nombre del cliente
+  nombreCliente: any; // Variable para almacenar el nombre del cliente
   userSubscription: Subscription | undefined; // Suscripción al observable user$
+  role:string = '';
 
-  constructor(private carritoService: CarritoService, private authService: AuthService) {
+  constructor(private carritoService: CarritoService, private authService: AuthService, private ventasService:VentasService) {
     this.userSubscription = this.authService.user$.subscribe(user => {
       console.log(user)
       if (user) {
-        this.nombreCliente = user.user.name;
+        this.nombreCliente = user.user?._id;
+        console.log(user.user.role)
+        this.role = user.user.role;
       } else {
         this.nombreCliente = null;
       }
@@ -31,7 +35,7 @@ export class CarritoComponent {
     });
 
     // Obtener el nombre del cliente del servicio de autenticación
-    this.nombreCliente = this.authService.userValue?.user.name ?? null
+    this.nombreCliente = this.authService.userValue?.user._id ?? null
   }
 
   ngOnDestroy(): void {
@@ -65,7 +69,7 @@ export class CarritoComponent {
 
   realizarVenta(): void {
     // Crea el objeto de venta
-    let venta: Venta = {
+    let venta: any = {
       codigo_venta: this.generarCodigoAleatorio(10),
       fecha: new Date(),
       cliente: this.nombreCliente ?? 'Cliente no identificado', // Usa el nombre del cliente o una cadena predeterminada si no está disponible
@@ -85,6 +89,9 @@ export class CarritoComponent {
     });
     venta.total = contador;
 
+this.ventasService.crearVenta(venta).subscribe(data => {
+  console.log(data)
+})
 
 
     this.carritoService.actualizarCarrito([])

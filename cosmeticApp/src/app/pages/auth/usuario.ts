@@ -7,7 +7,8 @@ export interface User {
 
 export interface UserResponse extends User{
     token:string,
-    user:{        
+    user:{   
+        _id?:string     
         name: string,
         lastname: string,
         num_cuenta: string,
@@ -19,4 +20,18 @@ export interface UserResponse extends User{
         role: Roles,
         avatar: string
     }
+}
+
+export interface Usuario{
+    _id?:string     
+        name: string,
+        lastname: string,
+        num_cuenta: string,
+        email: string,
+        password: string,
+        token: string,
+        expiresIn: string,
+        userId: number,
+        role: Roles,
+        avatar: string
 }

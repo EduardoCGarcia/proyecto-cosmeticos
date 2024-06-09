@@ -1,0 +1,28 @@
+<div class="container mt-3">
+    <h2>Mis Ventas</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Fecha</th>
+          <th>Artículos</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let venta of ventas">
+          <td>{{ venta.codigo_venta }}</td>
+          <td>{{ venta.fecha | date: 'short' }}</td>
+          <td>
+            <ul class="list-unstyled">
+              <li *ngFor="let item of venta.articulos">
+                {{ item.articulo.nombre }} (Cantidad: {{ item.cantidad }}, Precio Unitario: {{ item.precio_unitario }})
+              </li>
+            </ul>
+          </td>
+          <td>{{ venta.total | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './pages/auth/auth.service';
 import { CarritoService } from './pages/carrito/services/carrito.service';
+import { VentasService } from './pages/ventas/services/ventas.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { CarritoService } from './pages/carrito/services/carrito.service';
     HttpClientModule,
     SharedModule
   ],
-  providers: [AuthService, CarritoService],
+  providers: [AuthService, CarritoService, VentasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

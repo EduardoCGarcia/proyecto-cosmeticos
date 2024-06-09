@@ -24,12 +24,15 @@ export class HeaderComponent implements OnInit {
   updateMenuItems() {
     this.items = [
       { label: 'Productos', icon: 'pi pi-box', routerLink: ['pages/articulos'] },
-      { label: 'Carrito', icon: 'pi pi-shopping-cart', routerLink: ['pages/carrito'] },
       ...(!this.isLoggedIn ? [
         { label: 'Registrar', icon: 'pi pi-user-plus', routerLink: ['pages/auth/signup'] },
         { label: 'Login', icon: 'pi pi-sign-in', routerLink: ['pages/auth/login'] },
       ] : [
+        { label: 'Carrito', icon: 'pi pi-shopping-cart', routerLink: ['pages/carrito'] },
+        { label: 'Compras', icon: 'pi pi-wallet', routerLink: ['pages/ventas'] },
         { label: 'LogOut', icon: 'pi pi-sign-out', command: () => this.logout() },
+
+
       ]),
     ];
   }

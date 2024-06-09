@@ -18,7 +18,7 @@ export interface CarritoVenta {
   codigo_venta: string;
   fecha: Date;
   cliente: string;
-  articulos: CarritoItem[] | ArticuloItem;
+  articulos: CarritoItem[] | ArticuloItem[];
   total: number;
 }
 
