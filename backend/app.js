@@ -9,6 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
+app.use(express.static('storage'));
 
 // Importa y usa tus rutas desde un archivo separado
 app.use("/api", require('./routes'));
