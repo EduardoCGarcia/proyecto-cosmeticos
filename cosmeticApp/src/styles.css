@@ -3,6 +3,8 @@
 @import '~primeng/resources/primeng.min.css';
 @import '~primeicons/primeicons.css';
 @import '~primeflex/primeflex.css';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
 
 /* Import Google Fonts in CSS as a fallback */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');

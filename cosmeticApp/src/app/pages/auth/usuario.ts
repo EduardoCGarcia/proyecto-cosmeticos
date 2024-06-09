@@ -6,6 +6,8 @@ export interface User {
 }
 
 export interface UserResponse extends User{
+    token:string,
+    user:{        
         name: string,
         lastname: string,
         num_cuenta: string,
@@ -16,4 +18,5 @@ export interface UserResponse extends User{
         userId: number,
         role: Roles,
         avatar: string
+    }
 }

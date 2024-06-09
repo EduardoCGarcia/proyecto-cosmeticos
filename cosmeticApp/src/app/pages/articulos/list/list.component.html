@@ -1,19 +1,19 @@
 <div class="container mt-3 p-3">
   <div class="d flex justify-content-around flex-wrap">
-    
-    <div class="card me-1 text-center" style="width: 12rem" *ngFor="let articulo of listaDeArticulos">
+    <div
+      class="card me-1 text-center"
+      style="width: 12rem"
+      *ngFor="let articulo of listaDeArticulos"
+    >
       <img [src]="articulo.imagen_url" class="card-img-top" alt="..." />
       <div class="card-body">
-        <h5 class="card-title">{{articulo.nombre}}</h5>
-        <p class="card-text">
-          ${{articulo.precio}}
-        </p>
-        <a href="#" class="btn btn-primary">Agregar al carrito</a>
+        <h5 class="card-title">{{ articulo.nombre }}</h5>
+        <p class="card-text">${{ articulo.precio }}</p>
+        <a class="btn btn-primary" (click)="agregarAlCarrito(articulo)">Agregar al carrito</a>
       </div>
     </div>
-  
-    
   </div>
 </div>
 
-<pre>{{ listaDeArticulos | json}}</pre>
+<!-- <pre>{{ listaDeArticulos | json }}</pre>
+ -->

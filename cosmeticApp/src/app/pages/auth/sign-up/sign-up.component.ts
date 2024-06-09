@@ -30,16 +30,21 @@ export class SignUpComponent {
     if (this.registerForm.valid) {
       const formValues = this.registerForm.value;
       const user: UserResponse = {
-        name: formValues.name,
-        lastname: formValues.lastname,
-        num_cuenta: formValues.num_cuenta,
-        email: formValues.email,
-        password: formValues.password,
         token: '',
-        expiresIn: '',
-        userId: 0,
-        role: 'user',
-        avatar: ''
+        user: {
+          name: formValues.name,
+          lastname: formValues.lastname,
+          num_cuenta: formValues.num_cuenta,
+          email: formValues.email,
+          password: formValues.password,
+          token: '',
+          expiresIn: '',
+          userId: 0,
+          role: 'user',
+          avatar: ''
+        },
+        email: '',
+        password: ''
       };
       this.authService.register(user).subscribe({
         next: (response) => {
