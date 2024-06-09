@@ -32,8 +32,8 @@ const registerCtrl = async (req, res) => {
 const loginCtrl = async (req, res) => {
     try {
         req = matchedData(req);
-        const user = await usersModel.findOne({ num_cuenta: req.num_cuenta })
-            .select('password name lastname role num_cuenta avatar');
+        const user = await usersModel.findOne({ email: req.email })
+            .select('password name lastname role num_cuenta email');
 
         if (!user) {
             handleHttpError(res, "USER_NOT_EXIST");

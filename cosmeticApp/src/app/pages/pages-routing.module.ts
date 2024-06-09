@@ -9,6 +9,14 @@ const routes: Routes = [
     loadChildren:() => import("./auth/auth.module").then(m => m.AuthModule)
   },
   {
+    path: 'articulos',
+    loadChildren: () => import('./articulos/articulos.module').then(m => m.ArticulosModule)
+  },
+  {
+    path: 'carrito',
+    loadChildren: () => import('./carrito/carrito.module').then(m => m.CarritoModule)
+  },
+  {
     path:'', redirectTo:'auth', pathMatch:'full'
   },
   {

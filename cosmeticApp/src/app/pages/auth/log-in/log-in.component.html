@@ -1,1 +1,50 @@
-<p>log-in works!</p>
+<div class="container">
+    <div class="card mt-5 p-3">
+      <div class="card-title text-center">
+        <h2 class="fs-1 mt-3">Login</h2>
+        <span class="fw-bold">Ingresa a nuestro paraiso de cosmeticos</span>
+      </div>
+  
+      <div class="card-body">
+        <div class="d-flex justify-content-center">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-50">
+            <div class="form-floating mb-3">
+              <input
+                type="email"
+                class="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+                formControlName="email"
+              />
+              <label for="floatingInput">Email address</label>
+              <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="text-danger">
+                <div *ngIf="loginForm.get('email')?.errors?.['required']">
+                  El correo es obligatorio.
+                </div>
+                <div *ngIf="loginForm.get('email')?.errors?.['email']">
+                  El correo no es válido.
+                </div>
+              </div>
+            </div>
+            <div class="form-floating">
+              <input
+                type="password"
+                class="form-control"
+                id="floatingPassword"
+                placeholder="Password"
+                formControlName="password"
+              />
+              <label for="floatingPassword">Password</label>
+              <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="text-danger">
+                <div *ngIf="loginForm.get('password')?.errors?.['required']">
+                  La contraseña es obligatoria.
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success w-100 mt-5" [disabled]="loginForm.invalid">Ingresar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

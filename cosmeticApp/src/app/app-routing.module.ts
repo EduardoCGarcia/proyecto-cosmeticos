@@ -12,6 +12,9 @@ const routes: Routes = [
     component:Error404Component
   },
   {
+    path:'', redirectTo:'pages', pathMatch:'full'
+  },
+  {
     path:'**', redirectTo:'error404', pathMatch:'full'
   }
 ];

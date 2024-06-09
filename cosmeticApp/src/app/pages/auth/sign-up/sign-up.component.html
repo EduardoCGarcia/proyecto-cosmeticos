@@ -1,1 +1,95 @@
-<p>sign-up works!</p>
+<div class="container">
+    <div class="card mt-5 p-3">
+      <div class="card-title text-center">
+        <h2 class="fs-1 mt-3">Registro</h2>
+        <span class="fw-bold">Crea tu cuenta para acceder a nuestro paraíso de cosméticos</span>
+      </div>
+  
+      <div class="card-body">
+        <div class="d-flex justify-content-center">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="w-50">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingName"
+                placeholder="Nombre"
+                formControlName="name"
+              />
+              <label for="floatingName">Nombre</label>
+              <div *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)" class="text-danger">
+                <div *ngIf="registerForm.get('name')?.errors?.['required']">
+                  El nombre es obligatorio.
+                </div>
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingLastname"
+                placeholder="Apellido"
+                formControlName="lastname"
+              />
+              <label for="floatingLastname">Apellido</label>
+              <div *ngIf="registerForm.get('lastname')?.invalid && (registerForm.get('lastname')?.dirty || registerForm.get('lastname')?.touched)" class="text-danger">
+                <div *ngIf="registerForm.get('lastname')?.errors?.['required']">
+                  El apellido es obligatorio.
+                </div>
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingAccount"
+                placeholder="Número de cuenta"
+                formControlName="num_cuenta"
+              />
+              <label for="floatingAccount">Número de cuenta</label>
+              <div *ngIf="registerForm.get('num_cuenta')?.invalid && (registerForm.get('num_cuenta')?.dirty || registerForm.get('num_cuenta')?.touched)" class="text-danger">
+                <div *ngIf="registerForm.get('num_cuenta')?.errors?.['required']">
+                  El número de cuenta es obligatorio.
+                </div>
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="email"
+                class="form-control"
+                id="floatingEmail"
+                placeholder="name@example.com"
+                formControlName="email"
+              />
+              <label for="floatingEmail">Correo electrónico</label>
+              <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="text-danger">
+                <div *ngIf="registerForm.get('email')?.errors?.['required']">
+                  El correo es obligatorio.
+                </div>
+                <div *ngIf="registerForm.get('email')?.errors?.['email']">
+                  El correo no es válido.
+                </div>
+              </div>
+            </div>
+            <div class="form-floating">
+              <input
+                type="password"
+                class="form-control"
+                id="floatingPassword"
+                placeholder="Contraseña"
+                formControlName="password"
+              />
+              <label for="floatingPassword">Contraseña</label>
+              <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="text-danger">
+                <div *ngIf="registerForm.get('password')?.errors?.['required']">
+                  La contraseña es obligatoria.
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success w-100 mt-5" [disabled]="registerForm.invalid">Registrar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
