@@ -85,6 +85,10 @@ export class CarritoComponent {
     });
     venta.total = contador;
 
+
+
+    this.carritoService.actualizarCarrito([])
+
     console.log(venta);
   }
 
