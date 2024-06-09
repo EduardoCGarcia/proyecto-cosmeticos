@@ -14,6 +14,10 @@ const validatorCreateArticle = [
         .exists()
         .notEmpty()
         .isNumeric(),
+        check("precio")
+        .exists()
+        .notEmpty()
+        .isNumeric(),
     check("marca")
         .exists()
         .isLength({ min: 0, max: 50 }),

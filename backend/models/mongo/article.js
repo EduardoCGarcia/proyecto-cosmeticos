@@ -13,6 +13,9 @@ const ArticleSchema = new mongoose.Schema(
         cantidad: {
             type: Number
         },
+        precio: {
+            type: Number
+        },
         marca: {
             type: String
         },
