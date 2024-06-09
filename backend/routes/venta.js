@@ -7,14 +7,19 @@ const {
   getItem,
   deleteItem,
   updateItem,
+  getVentasPorCliente,
 } = require("../controllers/ventas");
 const {
   validatorCreateVenta,
-  validatorBuscarVenta,
+  validatorGetVentasPorCliente,
 } = require("../validators/venta");
 
 // Obtener todas las ventas
 router.get("/", getItems);
+
+
+router.get("/:clienteId", validatorGetVentasPorCliente, getVentasPorCliente);
+
 
 // Obtener una venta por su ID
 //router.get("/:id", validatorBuscarVenta, getItem);

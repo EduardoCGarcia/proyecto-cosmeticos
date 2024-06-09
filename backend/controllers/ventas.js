@@ -9,7 +9,7 @@ const handleHttpError = require("../utils/handleError");
  */
 const getItems = async (req, res) => {
     try {
-        const data = await ventasModel.find({}).populate('articulos.articulo');
+        const data = await ventasModel.find({}).populate('articulos.articulo').populate('cliente');
         res.send(data);
     } catch (e) {
         console.log(e);
@@ -26,7 +26,7 @@ const getItem = async (req, res) => {
     try {
         req = matchedData(req);
         const { id } = req;
-        const data = await ventasModel.findById(id).populate('articulos.articulo');
+        const data = await ventasModel.findById(id).populate('articulos.articulo').populate('cliente');
         res.send(data);
     } catch (e) {
         console.log(e);
@@ -83,7 +83,7 @@ const deleteItem = async (req, res) => {
 const updateItem = async (req, res) => {
     try {
         const { id, ...body } = matchedData(req);
-        const data = await ventasModel.findByIdAndUpdate(id, body, { new: true }).populate('articulos.articulo');
+        const data = await ventasModel.findByIdAndUpdate(id, body, { new: true }).populate('articulos.articulo').populate('cliente');
         res.send(data);
     } catch (e) {
         console.log(e);
@@ -91,4 +91,20 @@ const updateItem = async (req, res) => {
     }
 };
 
-module.exports = { createItem, getItems, getItem, deleteItem, updateItem };
+/**
+ * Obtiene todas las ventas de un cliente específico
+ * @param {*} req 
+ * @param {*} res 
+ */
+const getVentasPorCliente = async (req, res) => {
+    try {
+        const { clienteId } = matchedData(req);
+        const data = await ventasModel.find({ cliente: clienteId }).populate('articulos.articulo').populate('cliente');
+        res.send(data);
+    } catch (e) {
+        console.log(e);
+        handleHttpError(res, "ERROR_GET_VENTAS_POR_CLIENTE");
+    }
+};
+
+module.exports = { createItem, getItems, getItem, deleteItem, updateItem, getVentasPorCliente };

@@ -38,7 +38,8 @@ const VentaSchema = new mongoose.Schema(
             required: true
         },
         cliente: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users', // Referencia al esquema de usuarios
             required: true
         },
         articulos: [VentaItemSchema], // Array de subesquemas
