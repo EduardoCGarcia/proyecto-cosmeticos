@@ -56,5 +56,15 @@ const validatorGetVentasPorCliente = [
   },
 ];
 
+const validatorGetVentasPorFecha = [
+  check("fechaVenta")
+    .exists()
+    .notEmpty()
+    .withMessage("La fecha de Veta debe ser valida"),
+  (req, res, next) => {
+    return validateResults(req, res, next);
+  },
+];
 
-module.exports = { validatorCreateVenta, validatorGetVentasPorCliente };
+
+module.exports = { validatorCreateVenta, validatorGetVentasPorCliente, validatorGetVentasPorFecha };

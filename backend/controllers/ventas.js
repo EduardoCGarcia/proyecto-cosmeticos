@@ -96,6 +96,40 @@ const updateItem = async (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
+
+const getVentasPorFecha = async (req, res) => {
+    try {
+        const { fechaVenta } = matchedData(req);
+
+        // Convertir la fecha a un rango de inicio y fin del día
+        const startDate = new Date(fechaVenta);
+        startDate.setUTCHours(0, 0, 0, 0);
+
+        const endDate = new Date(fechaVenta);
+        endDate.setUTCHours(23, 59, 59, 999);
+
+        // Realizar la consulta usando el rango de fechas
+        const data = await ventasModel.find({
+        fecha: {
+            $gte: startDate,
+            $lte: endDate
+        }
+        }).populate('articulos.articulo').populate('cliente');
+
+        console.log(fechaVenta);
+        res.send(data);
+/*
+        const { fechaVenta } = matchedData(req);
+        const data = await ventasModel.find({ fecha: fechaVenta }).populate('articulos.articulo').populate('cliente');
+        console.log(fechaVenta);
+        res.send(data);
+        */
+    } catch (e) {
+        console.log(e);
+        handleHttpError(res, "ERROR_GET_VENTAS_POR_FECHA");
+    }
+};
+
 const getVentasPorCliente = async (req, res) => {
     try {
         const { clienteId } = matchedData(req);
@@ -107,4 +141,4 @@ const getVentasPorCliente = async (req, res) => {
     }
 };
 
-module.exports = { createItem, getItems, getItem, deleteItem, updateItem, getVentasPorCliente };
+module.exports = { createItem, getItems, getItem, deleteItem, updateItem, getVentasPorCliente, getVentasPorFecha };

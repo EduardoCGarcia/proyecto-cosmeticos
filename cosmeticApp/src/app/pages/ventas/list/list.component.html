@@ -1,28 +1,48 @@
 <div class="container mt-3">
-    <h2>Mis Ventas</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Fecha</th>
-          <th>Artículos</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let venta of ventas">
-          <td>{{ venta.codigo_venta }}</td>
-          <td>{{ venta.fecha | date: 'short' }}</td>
-          <td>
-            <ul class="list-unstyled">
-              <li *ngFor="let item of venta.articulos">
-                {{ item.articulo.nombre }} (Cantidad: {{ item.cantidad }}, Precio Unitario: {{ item.precio_unitario }})
-              </li>
-            </ul>
-          </td>
-          <td>{{ venta.total | currency }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <h2 *ngIf="rolUser[0] === 'admin'">Ventas</h2>
+  <h2 *ngIf="rolUser[0] === 'user'">Mis Compras</h2>
+  <h2 *ngIf="ventas.length == 0 && rolUser[0] === 'user'">Aún no has realizado ninguna venta, realiza tu primer compra!
+    :)</h2>
+
+  <div *ngIf="rolUser[0] === 'admin'">
+    <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col">
+          <label for="fecha" class="form-label">Fecha:</label>
+          <input type="date" class="form-control" id="fecha" formControlName="fecha">
+        </div>
+      </div>
+      <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+      </div>
+    </form>
+    <div *ngIf="rolUser[0] === 'admin'">
+      <button (click)="cargarVentasTotales()" class="btn btn-primary mt-3">Cargar Ventas Totales</button>
+    </div>
   </div>
-  
+  <table class="table table-striped" *ngIf="ventas.length > 0">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Fecha</th>
+        <th>Artículos</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let venta of ventas">
+        <td>{{ venta.codigo_venta }}</td>
+        <td>{{ venta.fecha | date: 'short' }}</td>
+        <td>
+          <ul class="list-unstyled">
+            <li *ngFor="let item of venta.articulos">
+              {{ item.articulo.nombre }} (Cantidad: {{ item.cantidad }}, Precio Unitario: {{ item.precio_unitario }})
+            </li>
+          </ul>
+        </td>
+        <td>{{ venta.total | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

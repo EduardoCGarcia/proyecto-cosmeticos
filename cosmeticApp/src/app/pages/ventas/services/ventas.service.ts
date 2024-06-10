@@ -27,8 +27,16 @@ export class VentasService {
 
   constructor(private http: HttpClient) {}
 
+  getVentasTotal(): Observable<Venta[]> {
+    return this.http.get<Venta[]>(`${this.API_URL}`);
+  }
+
   getVentasPorCliente(clienteId: string): Observable<Venta[]> {
     return this.http.get<Venta[]>(`${this.API_URL}/${clienteId}`);
+  }
+
+  getVentasPorFecha(fechaVenta: string): Observable<Venta[]> {
+    return this.http.get<Venta[]>(`${this.API_URL}/fechaVenta/${fechaVenta}`);
   }
 
   crearVenta(venta: CarritoVenta): Observable<Venta> {

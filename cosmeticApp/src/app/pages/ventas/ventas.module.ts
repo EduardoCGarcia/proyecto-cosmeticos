@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { VentasRoutingModule } from './ventas-routing.module';
 import { VentasComponent } from './ventas.component';
 import { ListComponent } from './list/list.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 
 @NgModule({
@@ -13,7 +16,8 @@ import { ListComponent } from './list/list.component';
   ],
   imports: [
     CommonModule,
-    VentasRoutingModule
+    VentasRoutingModule,
+    ReactiveFormsModule,
   ]
 })
 export class VentasModule { }

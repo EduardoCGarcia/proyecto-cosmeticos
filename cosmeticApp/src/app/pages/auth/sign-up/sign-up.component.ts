@@ -46,7 +46,7 @@ export class SignUpComponent {
         email: '',
         password: ''
       };
-      this.authService.register(user).subscribe({
+      this.authService.register(user.user).subscribe({
         next: (response) => {
           console.log('Registration successful', response);
           this.router.navigate(['pages/auth/login']); // Redirigir a la página de inicio de sesión después de un registro exitoso
