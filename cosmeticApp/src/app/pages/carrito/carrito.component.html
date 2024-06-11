@@ -37,13 +37,3 @@
       <button class="btn btn-primary" (click)="realizarVenta()">Continuar con la compra</button>
     </div>
   </div>
-
-  <h1>{{role}}</h1>
-
-  <ng-container *ngIf="role[0]==='user';else nouser">
-    <h1>Este es un cliente</h1>
-    </ng-container>
-    <ng-template #nouser>
-      <h2>Es un admin</h2>
-      <pre>{{role | json}}</pre>
-</ng-template>

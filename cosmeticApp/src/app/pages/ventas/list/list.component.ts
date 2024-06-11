@@ -68,7 +68,7 @@ export class ListComponent {
     this.ventas = this.ventasTotales;
     const encabezado = ['Código Venta', 'Fecha', 'Cliente', 'Artículos', 'Total'];
 
-    this.srvImpresion.imprimir("Essence Cosmetics", encabezado, this.ventas, "Bienes Patrimoniales", "Nombre del Servidor Universitario: VARGAS PEÑA MARCELA MARGARITA","Organismo Académico o Dependencia: FACULTAD DE INGENIERÍA",  true);
+    this.srvImpresion.imprimir("Essence Cosmetics", encabezado, this.ventas, "Ventas", "Nombre del Servidor Universitario: VARGAS PEÑA MARCELA MARGARITA","Organismo Académico o Dependencia: FACULTAD DE INGENIERÍA",  true);
   
 
   }
