@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { CarritoItem, CarritoService, ArticuloItem, Venta, CarritoVenta } from './services/carrito.service';
+import { CarritoItem, CarritoService, ArticuloItem, CarritoVenta } from './services/carrito.service';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { UserResponse } from '../auth/usuario';
-import { VentasService } from '../ventas/services/ventas.service';
+import { VentasService, Venta } from '../ventas/services/ventas.service';
+import { ImpresionService } from '../ventas/services/impresion.service';
+import { Articulo } from '../articulos/services/articulo.service';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-carrito',
@@ -15,14 +18,16 @@ export class CarritoComponent {
   nombreCliente: any; // Variable para almacenar el nombre del cliente
   userSubscription: Subscription | undefined; // Suscripción al observable user$
   role:string = '';
+  usuario!:UserResponse
 
-  constructor(private carritoService: CarritoService, private authService: AuthService, private ventasService:VentasService) {
+  constructor(private carritoService: CarritoService, private authService: AuthService, private ventasService:VentasService, private srvImpresion: ImpresionService) {
     this.userSubscription = this.authService.user$.subscribe(user => {
       console.log(user)
       if (user) {
         this.nombreCliente = user.user?._id;
         console.log(user.user.role)
         this.role = user.user.role;
+        this.usuario = user
       } else {
         this.nombreCliente = null;
       }
@@ -89,8 +94,23 @@ export class CarritoComponent {
     });
     venta.total = contador;
 
+    console.log(this.carrito)
+
+    const venta1:any = {
+      codigo_venta: venta.codigo_venta,
+      fecha: new Date(),
+      cliente: this.usuario.user,
+      articulos: this.carrito.map(articulo => articulo),
+      total: venta.total
+    }
+    console.log(venta1)
+
+    const doc = new jsPDF();
+    this.srvImpresion.imprimirTicket(doc, venta1);
+
 this.ventasService.crearVenta(venta).subscribe(data => {
   console.log(data)
+  
 })
 
 

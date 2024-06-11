@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Venta, VentasService } from '../services/ventas.service';
 import { AuthService } from '../../auth/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ImpresionService } from '../services/impresion.service';
 
 @Component({
   selector: 'app-list',
@@ -17,13 +18,14 @@ export class ListComponent {
   filterForm: FormGroup | any;
   fechaFilter: any;
 
-  constructor(private ventasService: VentasService, private authService: AuthService, private fb: FormBuilder) {
+  constructor(private ventasService: VentasService, private authService: AuthService, private fb: FormBuilder, private srvImpresion: ImpresionService) {
     this.filterForm = this.fb.group({
       fecha:['']
     });
   }
 
   ngOnInit(): void {
+    
     // Obtener el clienteId del servicio de autenticación
     this.authService.user$.subscribe(user => {
       if (user && user.user._id) {
@@ -64,6 +66,11 @@ export class ListComponent {
 
   cargarVentasTotales(): void{
     this.ventas = this.ventasTotales;
+    const encabezado = ['Código Venta', 'Fecha', 'Cliente', 'Artículos', 'Total'];
+
+    this.srvImpresion.imprimir("Essence Cosmetics", encabezado, this.ventas, "Bienes Patrimoniales", "Nombre del Servidor Universitario: VARGAS PEÑA MARCELA MARGARITA","Organismo Académico o Dependencia: FACULTAD DE INGENIERÍA",  true);
+  
+
   }
 
   onSubmit() {
