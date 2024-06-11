@@ -33,7 +33,11 @@
     </table>
     
     <!-- Botón para continuar con la compra -->
-    <div class="text-end">
+    <div class="text-end" *ngIf="carrito.length > 0">
       <button class="btn btn-primary" (click)="realizarVenta()">Continuar con la compra</button>
     </div>
+
+    <h3 *ngIf="carrito.length > 0">Total: {{total}}</h3>
+
   </div>
+
