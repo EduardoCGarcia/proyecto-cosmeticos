@@ -19,6 +19,7 @@ export class CarritoComponent {
   userSubscription: Subscription | undefined; // Suscripción al observable user$
   role:string = '';
   usuario!:UserResponse
+  total:number = 0
 
   constructor(private carritoService: CarritoService, private authService: AuthService, private ventasService:VentasService, private srvImpresion: ImpresionService) {
     this.userSubscription = this.authService.user$.subscribe(user => {
@@ -41,6 +42,14 @@ export class CarritoComponent {
 
     // Obtener el nombre del cliente del servicio de autenticación
     this.nombreCliente = this.authService.userValue?.user._id ?? null
+
+    // Calcula el total y añade los artículos a la venta
+    let contador = 0;
+this.carrito.forEach(item => {
+  contador += item.cantidad * item.precio_unitario;
+});
+this.total = parseFloat(contador.toFixed(2)); // Redondear el total a dos dígitos decimales
+this.actualizarCarrito();
   }
 
   ngOnDestroy(): void {
@@ -50,12 +59,25 @@ export class CarritoComponent {
 
   incrementarCantidad(item: CarritoItem): void {
     item.cantidad++;
+    let contador = 0;
+this.carrito.forEach(item => {
+  contador += item.cantidad * item.precio_unitario;
+});
+this.total = parseFloat(contador.toFixed(2)); // Redondear el total a dos dígitos decimales
+this.actualizarCarrito();
+
     this.actualizarCarrito();
   }
 
   decrementarCantidad(item: CarritoItem): void {
     if (item.cantidad > 1) {
       item.cantidad--;
+      // Calcula el total y añade los artículos a la venta
+      let contador = 0;
+      this.carrito.forEach(item => {
+        contador += item.cantidad * item.precio_unitario;
+      });
+      this.total = parseFloat(contador.toFixed(2)); // Redondear el total a dos dígitos decimales
       this.actualizarCarrito();
     }
   }
@@ -64,6 +86,12 @@ export class CarritoComponent {
     const index = this.carrito.indexOf(item);
     if (index !== -1) {
       this.carrito.splice(index, 1);
+      let contador = 0;
+this.carrito.forEach(item => {
+  contador += item.cantidad * item.precio_unitario;
+});
+this.total = parseFloat(contador.toFixed(2)); // Redondear el total a dos dígitos decimales
+this.actualizarCarrito();
       this.actualizarCarrito();
     }
   }
@@ -93,6 +121,7 @@ export class CarritoComponent {
       contador += item.cantidad * item.precio_unitario;
     });
     venta.total = contador;
+    this.total= contador 
 
     console.log(this.carrito)
 
