@@ -124,4 +124,70 @@ export class ImpresionService {
 
     }
   }
+
+  imprimirTicket(doc: jsPDF, venta: any) {
+    var nombresMeses = [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre'
+      ];
+      var imgData = 'logo.png';
+      var fecha = new Date();
+      var numeroDia = fecha.getDate();
+      var nombreMes = nombresMeses[fecha.getMonth()];
+      var anio = fecha.getFullYear();
+  
+      var fechaFormateada = numeroDia + '/' + nombreMes + '/' + anio;
+      var fechaLimite = (numeroDia+3) + '/' + nombreMes + '/' + anio;
+      
+      doc.text('Fecha: ' + fechaFormateada,100,10); // Cambia las coordenadas (10, 10) según tus necesidades
+      doc.text('Fecha limite: ' + fechaLimite,100,20); // Cambia las coordenadas (10, 10) según tus necesidades
+    
+      
+
+
+    const folio = `Folio: ${venta.codigo_venta}`;
+    const cliente = `Cliente: ${venta.cliente.name} ${venta.cliente.lastname}`;
+    const encabezado = ['Producto', 'Cantidad', 'Precio Unitario'];
+  
+    const cuerpo = venta.articulos.map((item: any) => [
+      item.articulo.nombre,
+      item.cantidad.toString(),
+      item.precio_unitario.toFixed(2)
+    ]);
+  
+    doc.text(folio, 10, 10);
+    doc.text(cliente, 10, 20);
+  
+    let finalY = 30; // Posición inicial de la tabla
+  
+    autoTable(doc, {
+      startY: finalY,
+      head: [encabezado],
+      body: cuerpo,
+      theme: 'grid',
+      styles: {
+        fontSize: 6,
+        halign: 'center'
+      },
+      didDrawPage: (data) => {
+        finalY = data.cursor?.y ?? finalY; // Asignar `finalY` o mantener su valor si `data.cursor?.y` es `undefined`
+      }
+    });
+  
+    const total = `Total: ${venta.total.toFixed(2)}`;
+    doc.text(total, 10, finalY + 10); // Posicionar el total debajo de la tabla
+  
+    doc.save(`ticket_${venta.codigo_venta}.pdf`);
+  }
+  
 }
