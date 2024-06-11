@@ -36,7 +36,7 @@ const ArticleSchema = new mongoose.Schema(
         },
         imagen_url: {  // Campo para la URL de la imagen
             type: String,
-            default: "http://localstorage:3000/file-1717954187867.png"
+            
         }
     },
     {

@@ -23,7 +23,7 @@ const validatorCreateArticle = [
         .isLength({ min: 0, max: 50 }),
     check("modelo")
         .exists()
-        .isLength({ min: 0, max: 20 }),
+        .isLength({ min: 0, max: 30 }),
     check("num_serie")
         .exists()
         .isLength({ min: 0, max: 20 }),
